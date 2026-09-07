@@ -1,0 +1,90 @@
+<Window x:Class="SunsteadLauncher.ErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sunstead Launcher" Width="420" SizeToContent="Height"
+        Icon="pack://application:,,,/logo.ico"
+        WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        FontFamily="Fonts/#Product Sans"
+        Foreground="{StaticResource TextHi}"
+        PreviewKeyDown="Window_PreviewKeyDown">
+
+    <Window.Resources>
+        <Style x:Key="OkButton" TargetType="Button">
+            <Setter Property="FontFamily" Value="Fonts/#Product Sans"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextHi}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bg" CornerRadius="9" Background="#22F87171" Padding="22,7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#3DF87171"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#55F87171"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border CornerRadius="16" Margin="10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF241522" Offset="0"/>
+                    <GradientStop Color="#FF0F0D14" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" BlurRadius="28" ShadowDepth="5" Opacity="0.55"/>
+            </Border.Effect>
+            <Border BorderBrush="#26F87171" BorderThickness="1" CornerRadius="16">
+                <StackPanel>
+                    <!-- header (drag zone) -->
+                    <Grid Height="50" Background="Transparent"
+                          MouseLeftButtonDown="Header_MouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
+                            <Grid Width="24" Height="24" VerticalAlignment="Center">
+                                <Ellipse Fill="#2EF87171">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect Color="#F87171" BlurRadius="12" ShadowDepth="0" Opacity="0.6"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <TextBlock Text="!" FontSize="14" FontWeight="Bold"
+                                           Foreground="#FFF87171" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" Margin="0,-1,0,0"/>
+                            </Grid>
+                            <TextBlock Text="Injection failed" FontSize="14.5" FontWeight="Bold"
+                                       Foreground="{StaticResource TextHi}"
+                                       VerticalAlignment="Center" Margin="10,1,0,0"/>
+                        </StackPanel>
+                        <Button Style="{StaticResource WinButton}" Content="&#x2715;"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Margin="0,0,12,0" Click="Close_Click"/>
+                    </Grid>
+                    <Border Height="1" Margin="16,0" Background="#14FFFFFF"/>
+
+                    <!-- message -->
+                    <TextBlock x:Name="MsgText" Margin="20,14,20,4" FontSize="12.5"
+                               TextWrapping="Wrap" LineHeight="18"
+                               Foreground="{StaticResource TextMid}"/>
+
+                    <Button Style="{StaticResource OkButton}" Content="OK"
+                            HorizontalAlignment="Right" Margin="20,14,20,16"
+                            Click="Close_Click"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>
+</Window>
